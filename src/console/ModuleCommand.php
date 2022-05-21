@@ -47,7 +47,7 @@ class ModuleCommand extends Command
 
     private function componentName():string
     {
-        return explode('/', $this->moduleName())[1];
+        return explode('/', $this->moduleName())[0];
     }
 
     private function componentClass():string
