@@ -11,10 +11,9 @@ class ModuleCommand extends Command
     use ResolvesStubPath;
 
 
-    protected  $name = 'nova:module {name}';
+    protected $signature = 'nova:module {name}';
 
-
-    protected  $description = 'Create a new module in nova';
+    protected $description = 'Create a new module in nova';
 
     public function handle(): void
     {
