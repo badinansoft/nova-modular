@@ -1,0 +1,13 @@
+<?php
+
+namespace {{ namespace }};
+
+use Laravel\Nova\Http\Requests\NovaRequest;
+
+trait Has{{ resource }}Lenses
+{
+    public function lenses(NovaRequest $request):array
+    {
+        return [];
+    }
+}

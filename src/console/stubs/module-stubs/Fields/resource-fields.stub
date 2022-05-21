@@ -1,0 +1,16 @@
+
+namespace {{ namespace }};
+
+use Laravel\Nova\Fields\ID;
+
+
+class {{resource}}Fields
+{
+    public function __invoke(): array
+    {
+        return [
+            ID::make()
+                ->sortable(),
+        ];
+    }
+}

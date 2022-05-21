@@ -1,0 +1,26 @@
+<?php
+
+namespace {{ namespace }};
+
+use Illuminate\Http\Request;
+use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Http\Requests\NovaRequest;
+
+class {{ class }} extends Resource
+{
+    use Has{{class}}Actions, Has{{class}}Filters, Has{{class}}Cards, Has{{class}}Lenses;
+
+    public static string $model = \{{ namespacedModel }}::class;
+
+    public static $title = 'id';
+
+    public static $search = [
+        'id',
+    ];
+
+    public function fields(NovaRequest $request):array
+    {
+        return (new {{class}}Fields)();
+    }
+
+}

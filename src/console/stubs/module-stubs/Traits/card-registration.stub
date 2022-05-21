@@ -1,0 +1,13 @@
+<?php
+
+namespace {{ namespace }};
+
+use Laravel\Nova\Http\Requests\NovaRequest;
+
+trait Has{{ resource }}Cards
+{
+    public function cards(NovaRequest $request):array
+    {
+        return [];
+    }
+}
