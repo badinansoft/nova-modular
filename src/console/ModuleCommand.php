@@ -24,13 +24,23 @@ class ModuleCommand extends Command
             $this->modulePath()
         );
 
-        $this->comment('Generating Resource Name...');
+        $this->comment('Generating Resource class...');
         $this->replace('{{ namespace }}', $this->componentNamespace(), $this->modulePath().'/resource.stub');
         $this->replace('{{ class }}', $this->componentClass(), $this->modulePath().'/resource.stub');
+        $this->replace('{{ namespacedModel }}', $this->namespaceModel(), $this->modulePath().'/resource.stub');
 
         (new Filesystem)->move(
             $this->modulePath().'/resource.stub',
             $this->modulePath().'/'.$this->componentClass().'.php'
+        );
+
+        $this->comment('Generating Action Traits...');
+        $this->replace('{{ class }}', $this->componentClass(), $this->modulePath().'/action-registration.stub');
+        $this->replace('{{ namespace }}', $this->TraitsNamespace(), $this->modulePath().'/action-registration.stub');
+
+        (new Filesystem)->move(
+            $this->modulePath().'/action-registration.stub',
+            $this->modulePath().'/'.$this->componentActionTrait().'.php'
         );
 
         $this->info('Resource created successfully.');
@@ -57,7 +67,12 @@ class ModuleCommand extends Command
 
     private function componentNamespace(): string
     {
-        return Str::studly('App\Nova\Modules\\'.$this->componentClass();
+        return Str::studly('App\Nova\Modules\\'.$this->componentClass());
+    }
+
+    private function namespaceModel(): string
+    {
+        return Str::studly('App\Models\\'.$this->componentClass().'::class');
     }
 
     private function componentVendor(): string
@@ -69,5 +84,15 @@ class ModuleCommand extends Command
         return app_path('Nova/Modules/'.$this->moduleName());
     }
 
+    private function componentActionTrait(): string
+    {
+        return Str::studly('Has'.$this->componentClass().'Action');
+    }
+
+
+    private function TraitsNamespace(): string
+    {
+        return Str::studly('App\Nova\Modules\\'.$this->componentClass().'\Traits');
+    }
 
 }
