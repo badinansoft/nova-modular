@@ -35,12 +35,12 @@ class ModuleCommand extends Command
         );
 
         $this->comment('Generating Action Traits...');
-        $this->replace('{{ class }}', $this->componentClass(), $this->modulePath().'/action-registration.stub');
-        $this->replace('{{ namespace }}', $this->TraitsNamespace(), $this->modulePath().'/action-registration.stub');
+        $this->replace('{{ class }}', $this->componentClass(), $this->modulePath().'/Traits/action-registration.stub');
+        $this->replace('{{ namespace }}', $this->TraitsNamespace(), $this->modulePath().'/Traits/action-registration.stub');
 
         (new Filesystem)->move(
-            $this->modulePath().'/action-registration.stub',
-            $this->modulePath().'/'.$this->componentActionTrait().'.php'
+            $this->modulePath().'/Traits/action-registration.stub',
+            $this->modulePath().'/Traits/'.$this->componentActionTrait().'.php'
         );
 
         $this->info('Resource created successfully.');
