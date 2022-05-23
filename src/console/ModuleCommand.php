@@ -24,6 +24,11 @@ class ModuleCommand extends Command
             $this->modulePath()
         );
 
+        mkdir($this->modulePath().'/Filters');
+        mkdir($this->modulePath().'/Actions');
+        mkdir($this->modulePath().'/Lenses');
+        mkdir($this->modulePath().'/Metrics');
+
         $this->comment('Generating Resource class...');
         $this->replace('{{ namespace }}', $this->componentNamespace(), $this->modulePath().'/resource.stub');
         $this->replace('{{ class }}', $this->componentClass(), $this->modulePath().'/resource.stub');
@@ -86,12 +91,12 @@ class ModuleCommand extends Command
         $this->info('Resource created successfully.');
     }
 
-    protected function replace($search, $replace, $path)
+    protected function replace($search, $replace, $path):void
     {
         file_put_contents($path, str_replace($search, $replace, file_get_contents($path)));
     }
 
-    private function moduleName(){
+    private function moduleName():string{
         return $this->argument('name');
     }
 
@@ -115,12 +120,9 @@ class ModuleCommand extends Command
         return Str::studly('App\Models\\'.$this->componentClass().'::class');
     }
 
-    private function componentVendor(): string
-    {
-        return explode('/', $this->moduleName())[0];
-    }
 
-    private function modulePath(){
+
+    private function modulePath():string{
         return app_path('Nova/Modules/'.$this->moduleName());
     }
 
