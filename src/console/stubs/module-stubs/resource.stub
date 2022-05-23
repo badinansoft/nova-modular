@@ -8,7 +8,7 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 
 class {{ class }} extends Resource
 {
-    use Has{{class}}Actions, Has{{class}}Filters, Has{{class}}Cards, Has{{class}}Lenses;
+    use Has{{ class }}Actions, Has{{ class }}Filters, Has{{ class }}Cards, Has{{ class }}Lenses;
 
     public static string $model = \{{ namespacedModel }}::class;
 
@@ -20,7 +20,7 @@ class {{ class }} extends Resource
 
     public function fields(NovaRequest $request):array
     {
-        return (new {{class}}Fields)();
+        return (new {{ class }}Fields)();
     }
 
 }
