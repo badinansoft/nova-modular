@@ -25,8 +25,8 @@ class ModuleCommand extends Command
         );
 
         $this->comment('Generating Resource Name...');
-        $this->replace('{{ namespace }}', $this->componentNamespace(), $this->componentPath().'/resource.stub');
-        $this->replace('{{ class }}', $this->componentClass(), $this->componentPath().'/resource.stub');
+        $this->replace('{{ namespace }}', $this->componentNamespace(), $this->modulePath().'/resource.stub');
+        $this->replace('{{ class }}', $this->componentClass(), $this->modulePath().'/resource.stub');
 
         (new Filesystem)->move(
             $this->modulePath().'/resource.stub',
