@@ -20,7 +20,7 @@ class ModuleCommand extends Command
         $this->comment('Creating Folder for module ...');
 
         (new Filesystem)->copyDirectory(
-            __DIR__.'/module-stubs',
+            __DIR__.'/stubs/module-stubs',
             $this->modulePath()
         );
 
