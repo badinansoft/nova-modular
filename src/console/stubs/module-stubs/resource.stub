@@ -14,7 +14,7 @@ class {{ class }} extends Resource
 {
     use Has{{ class }}Actions, Has{{ class }}Filters, Has{{ class }}Cards, Has{{ class }}Lenses;
 
-    public static string $model = \{{ namespacedModel }}::class;
+    public static string $model = \{{ namespacedModel }};
 
     public static $title = 'id';
 

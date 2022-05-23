@@ -1,10 +1,10 @@
-
+<?php
 namespace {{ namespace }};
 
 use Laravel\Nova\Fields\ID;
 
 
-class {{resource}}Fields
+class {{ resource }}Fields
 {
     public function __invoke(): array
     {
