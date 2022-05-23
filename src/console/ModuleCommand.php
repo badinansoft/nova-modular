@@ -57,7 +57,7 @@ class ModuleCommand extends Command
 
     private function componentNamespace(): string
     {
-        return Str::studly($this->componentVendor()).'\\'.$this->componentClass();
+        return Str::studly('App\Nova\Modules\\'.$this->componentClass();
     }
 
     private function componentVendor(): string
