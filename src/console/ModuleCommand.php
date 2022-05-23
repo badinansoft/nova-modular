@@ -35,12 +35,40 @@ class ModuleCommand extends Command
         );
 
         $this->comment('Generating Action Traits...');
-        $this->replace('{{ class }}', $this->componentClass(), $this->modulePath().'/Traits/action-registration.stub');
+        $this->replace('{{ resource }}', $this->componentClass(), $this->modulePath().'/Traits/action-registration.stub');
         $this->replace('{{ namespace }}', $this->TraitsNamespace(), $this->modulePath().'/Traits/action-registration.stub');
 
         (new Filesystem)->move(
             $this->modulePath().'/Traits/action-registration.stub',
             $this->modulePath().'/Traits/'.$this->componentActionTrait().'.php'
+        );
+
+
+        $this->comment('Generating Card Traits...');
+        $this->replace('{{ resource }}', $this->componentClass(), $this->modulePath().'/Traits/card-registration.stub');
+        $this->replace('{{ namespace }}', $this->TraitsNamespace(), $this->modulePath().'/Traits/card-registration.stub');
+
+        (new Filesystem)->move(
+            $this->modulePath().'/Traits/card-registration.stub',
+            $this->modulePath().'/Traits/'.$this->componentCardTrait().'.php'
+        );
+
+        $this->comment('Generating Lenses Traits...');
+        $this->replace('{{ resource }}', $this->componentClass(), $this->modulePath().'/Traits/lenses-registration.stub');
+        $this->replace('{{ namespace }}', $this->TraitsNamespace(), $this->modulePath().'/Traits/lenses-registration.stub');
+
+        (new Filesystem)->move(
+            $this->modulePath().'/Traits/lenses-registration.stub',
+            $this->modulePath().'/Traits/'.$this->componentLensesTrait().'.php'
+        );
+
+        $this->comment('Generating Filters Traits...');
+        $this->replace('{{ resource }}', $this->componentClass(), $this->modulePath().'/Traits/filters-registration.stub');
+        $this->replace('{{ namespace }}', $this->TraitsNamespace(), $this->modulePath().'/Traits/filters-registration.stub');
+
+        (new Filesystem)->move(
+            $this->modulePath().'/Traits/filters-registration.stub',
+            $this->modulePath().'/Traits/'.$this->componentFiltersTrait().'.php'
         );
 
         $this->info('Resource created successfully.');
@@ -89,6 +117,20 @@ class ModuleCommand extends Command
         return Str::studly('Has'.$this->componentClass().'Action');
     }
 
+    private function componentCardTrait(): string
+    {
+        return Str::studly('Has'.$this->componentClass().'Cards');
+    }
+
+    private function componentLensesTrait(): string
+    {
+        return Str::studly('Has'.$this->componentClass().'Lenses');
+    }
+
+    private function componentFiltersTrait(): string
+    {
+        return Str::studly('Has'.$this->componentClass().'Filters');
+    }
 
     private function TraitsNamespace(): string
     {
