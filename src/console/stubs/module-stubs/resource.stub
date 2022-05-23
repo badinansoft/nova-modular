@@ -4,7 +4,11 @@ namespace {{ namespace }};
 
 use App\Nova\Resource;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use {{ namespace }}\Fields\{{ class }}Fields;
 use {{ namespace }}\Traits\Has{{ class }}Actions;
+use {{ namespace }}\Traits\Has{{ class }}Cards;
+use {{ namespace }}\Traits\Has{{ class }}Filters;
+use {{ namespace }}\Traits\Has{{ class }}Lenses;
 
 class {{ class }} extends Resource
 {

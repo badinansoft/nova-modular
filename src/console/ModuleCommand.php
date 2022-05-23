@@ -34,6 +34,18 @@ class ModuleCommand extends Command
             $this->modulePath().'/'.$this->componentClass().'.php'
         );
 
+
+
+        $this->comment('Generating Resource Fields class ...');
+        $this->replace('{{ namespace }}', $this->fieldsNamespace(), $this->modulePath().'/Fields/resource-fields.stub');
+        $this->replace('{{ resource }}', $this->componentClass(), $this->modulePath().'/Fields/resource-fields.stub');
+
+        (new Filesystem)->move(
+            $this->modulePath().'/Fields/resource-fields.stub',
+            $this->modulePath().'/Fields/'.$this->componentClass().'Fields.php'
+        );
+
+
         $this->comment('Generating Action Traits...');
         $this->replace('{{ resource }}', $this->componentClass(), $this->modulePath().'/Traits/action-registration.stub');
         $this->replace('{{ namespace }}', $this->TraitsNamespace(), $this->modulePath().'/Traits/action-registration.stub');
@@ -114,7 +126,7 @@ class ModuleCommand extends Command
 
     private function componentActionTrait(): string
     {
-        return Str::studly('Has'.$this->componentClass().'Action');
+        return Str::studly('Has'.$this->componentClass().'Actions');
     }
 
     private function componentCardTrait(): string
@@ -135,6 +147,11 @@ class ModuleCommand extends Command
     private function TraitsNamespace(): string
     {
         return Str::studly('App\Nova\Modules\\'.$this->componentClass().'\Traits');
+    }
+
+    private function fieldsNamespace(): string
+    {
+        return Str::studly('App\Nova\Modules\\'.$this->componentClass().'\Fields');
     }
 
 }
