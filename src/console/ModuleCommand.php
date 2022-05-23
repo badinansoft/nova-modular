@@ -29,8 +29,8 @@ class ModuleCommand extends Command
         $this->replace('{{ class }}', $this->componentClass(), $this->componentPath().'/resource.stub');
 
         (new Filesystem)->move(
-            $this->componentPath().'/resource.stub',
-            $this->componentPath().'/'.$this->componentClass().'.php'
+            $this->modulePath().'/resource.stub',
+            $this->modulePath().'/'.$this->componentClass().'.php'
         );
 
         $this->info('Resource created successfully.');
@@ -68,4 +68,6 @@ class ModuleCommand extends Command
     private function modulePath(){
         return app_path('Nova/Modules/'.$this->moduleName());
     }
+
+
 }
